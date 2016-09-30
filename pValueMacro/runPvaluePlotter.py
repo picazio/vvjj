@@ -10,7 +10,7 @@
 
 ############################# Settings area  ############################
 
-runOverWS= False #Set to 'False' if you already have the output*.txt files
+runOverWS= True #Set to 'False' if you already have the output*.txt files
 #inputPreDir="/afs/cern.ch/work/y/yygao/public/VVJJWorkspaces/28Sep2016/"
 #inputName = "CxAOD_23Sep2016_13p3ifb_NoTrk"
 #inputName = "CxAOD_23Sep2016_13p3ifb"
