@@ -16,7 +16,7 @@ import atlasStyleMacro
 
 def readOutputFilePValue(output_dic) :
     for model in output_dic :
-        f = open(output_dic[model][5], 'r')
+        f = open(output_dic[model][6], 'r')
         pValueResults={}
         for line in f :
             pValueResults[float(line.split(' ')[0])]=float(line.split(' ')[1])
@@ -55,15 +55,15 @@ def createPValuePlot(input_dictionary,pvalue_plot_Name,lumiOnPlot) :
         for model in input_dictionary :
                 graph=TGraph()
                 graph.SetNameTitle("g_p0_"+model, "p0_"+model)
-                masses=input_dictionary[model][6].keys()
+                masses=input_dictionary[model][7].keys()
                 masses.sort()
                 for imass,mass in enumerate(masses) :
-                        graph.SetPoint(imass,mass,input_dictionary[model][6][mass])
-                graph.SetLineColor(input_dictionary[model][1])
-                graph.SetLineWidth(input_dictionary[model][2])
-                graph.SetLineStyle(input_dictionary[model][3])
-                graphs[input_dictionary[model][3]-1]=graph
-                l.AddEntry(graph,input_dictionary[model][4],"L")
+                        graph.SetPoint(imass,mass,input_dictionary[model][7][mass])
+                graph.SetLineColor(input_dictionary[model][2])
+                graph.SetLineWidth(input_dictionary[model][3])
+                graph.SetLineStyle(input_dictionary[model][4])
+                graphs[input_dictionary[model][4]-1]=graph
+                l.AddEntry(graph,input_dictionary[model][5],"L")
 
         for igraph,graph in enumerate(graphs) :
                 if igraph==0 :
@@ -74,13 +74,13 @@ def createPValuePlot(input_dictionary,pvalue_plot_Name,lumiOnPlot) :
 
                         yAxis.SetTitle("Local p_{0}")
                         yAxis.SetNdivisions(505)
-                        yAxis.SetRangeUser(1 - Math.gaussian_cdf(6),1e3)
+                        yAxis.SetRangeUser(1 - Math.gaussian_cdf(6),1e6)
 
                         xAxis.SetTitle("m_{JJ} [GeV]")
                         xAxis.SetNdivisions(505)
 
                 else :
-                        grap.Draw("L")
+                        graph.Draw("L")
         
         atl =TLatex(0.18,0.87,"ATLAS")
         atl.SetNDC()
