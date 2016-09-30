@@ -69,7 +69,7 @@ def createPValuePlot(input_dictionary,pvalue_plot_Name,lumiOnPlot) :
                 graph.SetLineWidth(input_dictionary[model][3])
                 graph.SetLineStyle(input_dictionary[model][4])
                 graphs[input_dictionary[model][4]-1]=graph
-                l.AddEntry(graph,input_dictionary[model][5],"L")
+                
 
         for igraph,graph in enumerate(graphs) :
                 if igraph==0 :
@@ -87,7 +87,8 @@ def createPValuePlot(input_dictionary,pvalue_plot_Name,lumiOnPlot) :
 
                 else :
                         graph.Draw("L")
-        
+                l.AddEntry(graph,input_dictionary[graph.GetName().split('_')[2]][5],"L")
+
         atl =TLatex(0.18,0.87,"ATLAS")
         atl.SetNDC()
         atl.SetTextFont(72)
