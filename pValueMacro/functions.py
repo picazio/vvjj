@@ -19,7 +19,13 @@ def readOutputFilePValue(output_dic) :
         f = open(output_dic[model][6], 'r')
         pValueResults={}
         for line in f :
-            pValueResults[float(line.split(' ')[0])]=float(line.split(' ')[1])
+            mass=float(line.split(' ')[0])
+            value=[]
+            if line.split(' ')[1]=="-nan" :
+                value.append(float(0.5))
+            else :
+                value.append(float(line.split(' ')[1]))
+            pValueResults[mass]=value[0]
         output_dic[model].append(pValueResults)
     
 
@@ -129,6 +135,7 @@ def createPValuePlot(input_dictionary,pvalue_plot_Name,lumiOnPlot) :
         l.Draw("same")
 
         c1.SaveAs(pvalue_plot_Name)
+        c1.SaveAs('.C'.join(pvalue_plot_Name.split('.pdf')))
 
 def replaceArguments(targetFile,inputDir,input,lumitag,model,sel,hasNtrk) :
         replace(targetFile,"TString inputPreDir = \"\"","TString inputPreDir = \""+inputDir+"\"")
